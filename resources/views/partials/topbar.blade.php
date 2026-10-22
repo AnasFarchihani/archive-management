@@ -68,10 +68,10 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 aria-label="Menu du profil">
-                <span class="avatar">SB</span>
+                <span class="avatar">{{ auth()->user()->department->code }}</span>
                 <span class="d-none d-lg-inline text-start lh-sm">
-                    Sara Benali<br>
-                    <small class="text-muted">Administratrice</small>
+                    {{auth()->user()->name}}<br>
+                    <small class="text-muted">{{ auth()->user()->role }}</small>
                 </span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -91,10 +91,13 @@
                     <hr class="dropdown-divider">
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#">
-                        <i class="bi bi-box-arrow-left me-2"></i>
-                        Déconnexion
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="dropdown-item" href="#">
+                            <i class="bi bi-box-arrow-left me-2"></i>
+                            Déconnexion
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>

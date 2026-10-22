@@ -73,13 +73,17 @@
 
     
     <div class="sb-foot">
-        <a
-            class="sb-link"
-            href="login.html"
-            data-label="Déconnexion">
-            <i class="bi bi-box-arrow-left" aria-hidden="true"></i>
-            <span class="sb-text">Déconnexion</span>
-        </a>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button
+                style="text-decoration: none;border: none;background:none;"
+                type="submit"
+                class="sb-link"
+                data-label="Déconnexion">
+                <i class="bi bi-box-arrow-left" aria-hidden="true"></i>
+                <span class="sb-text">Déconnexion</span>
+            </button>
+        </form>
     </div>
 </aside>
 <div class="sb-overlay" id="sbOverlay"></div>
