@@ -68,7 +68,8 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 aria-label="Menu du profil">
-                <span class="avatar">{{ auth()->user()->department->code }}</span>
+                <span class="avatar">{{ auth()->user()->department?->code ?? '—' }}</span>
+                {{-- <span class="avatar">{{ auth()->user()->department->code }}</span> --}}
                 <span class="d-none d-lg-inline text-start lh-sm">
                     {{auth()->user()->name}}<br>
                     <small class="text-muted">{{ auth()->user()->role }}</small>

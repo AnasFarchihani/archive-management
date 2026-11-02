@@ -9,81 +9,114 @@
         </span>
     </a>
     <nav class="sb-nav">
-        <div class="sb-group">Principal</div>
-        <a
-            class="sb-link active"
-            aria-current="page"
-            href="#"
-            data-label="Tableau de bord">
-            <i class="bi bi-speedometer2" aria-hidden="true"></i>
-            <span class="sb-text">Tableau de bord</span>
-        </a>
-        <div class="sb-group">Archives</div>
-        <a
-            class="sb-link"
-            href="#"
-            data-label="Registre des archives">
-            <i class="bi bi-archive" aria-hidden="true"></i>
-            <span class="sb-text">Registre des archives</span>
-        </a>
-        <a
-            class="sb-link"
-            href="#"
-            data-label="Nouvelle archive">
-            <i class="bi bi-plus-circle" aria-hidden="true"></i>
-            <span class="sb-text">Nouvelle archive</span>
-        </a>
-        <a
-            class="sb-link"
-            href="#"
-            data-label="Corbeille">
-            <i class="bi bi-trash3" aria-hidden="true"></i>
-            <span class="sb-text">Corbeille</span>
-        </a>
-        <div class="sb-group">Administration</div>
-        <a
-            class="sb-link"
-            href="#"
-            data-label="Utilisateurs">
-            <i class="bi bi-people" aria-hidden="true"></i>
-            <span class="sb-text">Utilisateurs</span>
-        </a>
-        <a
-            class="sb-link"
-            href="#"
-            data-label="Départements">
-            <i class="bi bi-diagram-3" aria-hidden="true"></i>
-            <span class="sb-text">Départements</span>
-        </a>
-        <a
-            class="sb-link"
-            href="#"
-            data-label="Emplacements">
-            <i class="bi bi-geo-alt" aria-hidden="true"></i>
-            <span class="sb-text">Emplacements</span>
-        </a>
-        <a
-            class="sb-link"
-            href="#"
-            data-label="Journal d'audit">
-            <i class="bi bi-journal-text" aria-hidden="true"></i>
-            <span class="sb-text">Journal d'audit</span>
-        </a>
+        @auth
+            @if (auth()->user()->isAdmin())
+            <div class="sb-group">Principal</div>
+            <a
+                class="sb-link active"
+                aria-current="page"
+                href="{{ route('dashboard') }}"
+                data-label="Tableau de bord">
+                <i class="bi bi-speedometer2" aria-hidden="true"></i>
+                <span class="sb-text">Tableau de bord</span>
+            </a>
+
+            <div class="sb-group">Archives</div>
+            <a
+                class="sb-link"
+                href="#"
+                data-label="Registre des archives">
+                <i class="bi bi-archive" aria-hidden="true"></i>
+                <span class="sb-text">Registre des archives</span>
+            </a>
+            <a
+                class="sb-link"
+                href="#"
+                data-label="Nouvelle archive">
+                <i class="bi bi-plus-circle" aria-hidden="true"></i>
+                <span class="sb-text">Nouvelle archive</span>
+            </a>
+            <a
+                class="sb-link"
+                href="#"
+                data-label="Corbeille">
+                <i class="bi bi-trash3" aria-hidden="true"></i>
+                <span class="sb-text">Corbeille</span>
+            </a>
+
+            <div class="sb-group">Administration</div>
+            <a
+                class="sb-link"
+                href="{{ route('admin.users.index') }}"
+                data-label="Utilisateurs">
+                <i class="bi bi-people" aria-hidden="true"></i>
+                <span class="sb-text">Utilisateurs</span>
+            </a>
+            <a
+                class="sb-link"
+                href="{{ route('admin.departments.index') }}"
+                data-label="Départements">
+                <i class="bi bi-diagram-3" aria-hidden="true"></i>
+                <span class="sb-text">Départements</span>
+            </a>
+            <a
+                class="sb-link"
+                href="{{ route('admin.storage-locations.index') }}"
+                data-label="Emplacements">
+                <i class="bi bi-geo-alt" aria-hidden="true"></i>
+                <span class="sb-text">Emplacements</span>
+            </a>
+            <a
+                class="sb-link"
+                href="#"
+                data-label="Journal d'audit">
+                <i class="bi bi-journal-text" aria-hidden="true"></i>
+                <span class="sb-text">Journal d'audit</span>
+            </a>
+
+            @else
+                <div class="sb-group">Principal</div>
+                    <a
+                        class="sb-link active"
+                        aria-current="page"
+                        href="#"
+                        data-label="Tableau de bord">
+                        <i class="bi bi-speedometer2" aria-hidden="true"></i>
+                        <span class="sb-text">Tableau de bord</span>
+                    </a>
+                    <div class="sb-group">Archives</div>
+                    <a
+                        class="sb-link"
+                        href="#"
+                        data-label="Registre des archives">
+                        <i class="bi bi-archive" aria-hidden="true"></i>
+                        <span class="sb-text">Registre des archives</span>
+                    </a>
+                    <a
+                        class="sb-link"
+                        href="#"
+                        data-label="Nouvelle archive">
+                        <i class="bi bi-plus-circle" aria-hidden="true"></i>
+                        <span class="sb-text">Nouvelle archive</span>
+                    </a>
+        @endif
+        @endauth
     </nav>
 
-    
     <div class="sb-foot">
-        <form method="POST" action="{{ route('logout') }}">
+        @auth
+            <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button
-                style="text-decoration: none;border: none;background:none;"
-                type="submit"
-                class="sb-link"
-                data-label="Déconnexion">
-                <i class="bi bi-box-arrow-left" aria-hidden="true"></i>
-                <span class="sb-text">Déconnexion</span>
-            </button>
-        </form>
+                <button
+                    type="submit"
+                    style="background: none;border:none"
+                    class="sb-link">
+                    <i class="bi bi-box-arrow-left" aria-hidden="true"></i>
+                    <span class="sb-text">Déconnexion</span>
+                </button>
+            </form>
+        @endauth
+        
     </div>
 </aside>
 <div class="sb-overlay" id="sbOverlay"></div>

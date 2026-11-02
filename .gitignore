@@ -25,3 +25,9 @@ Thumbs.db
 
 login_1.blade.php
 dashboard_1.blade.php
+app_1.blade.php
+_form_1.blade.php
+create_1.blade.php
+edit_1.blade.php
+index_1.blade.php
+show_1.blade.php

@@ -16,6 +16,15 @@
     <div class="app">
         @include('partials.topbar');
         <main id="main" class="content">
+            {{-- Flash Messages --}}
+
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>
