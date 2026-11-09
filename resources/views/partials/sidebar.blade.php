@@ -2,7 +2,7 @@
     class="sidebar"
     id="sidebar"
     aria-label="Navigation principale">
-    <a class="sb-brand" href="dashboard.html">
+    <a class="sb-brand" href="{{ route('dashboard') }}">
         <img src="{{ asset('assets/img/logo.svg') }}" alt="" width="34" height="34">
         <span class="sb-text">Archives
             <small>Gestion documentaire</small>
@@ -24,21 +24,21 @@
             <div class="sb-group">Archives</div>
             <a
                 class="sb-link"
-                href="#"
+                href="{{ route('archives.index') }}"
                 data-label="Registre des archives">
                 <i class="bi bi-archive" aria-hidden="true"></i>
                 <span class="sb-text">Registre des archives</span>
             </a>
             <a
                 class="sb-link"
-                href="#"
+                href="{{ route('archives.create') }}"
                 data-label="Nouvelle archive">
                 <i class="bi bi-plus-circle" aria-hidden="true"></i>
                 <span class="sb-text">Nouvelle archive</span>
             </a>
             <a
                 class="sb-link"
-                href="#"
+                href="{{ route('archives.trashed') }}"
                 data-label="Corbeille">
                 <i class="bi bi-trash3" aria-hidden="true"></i>
                 <span class="sb-text">Corbeille</span>
@@ -87,14 +87,14 @@
                     <div class="sb-group">Archives</div>
                     <a
                         class="sb-link"
-                        href="#"
+                        href="{{ route('archives.index') }}"
                         data-label="Registre des archives">
                         <i class="bi bi-archive" aria-hidden="true"></i>
                         <span class="sb-text">Registre des archives</span>
                     </a>
                     <a
                         class="sb-link"
-                        href="#"
+                        href="{{ route('archives.create') }}"
                         data-label="Nouvelle archive">
                         <i class="bi bi-plus-circle" aria-hidden="true"></i>
                         <span class="sb-text">Nouvelle archive</span>

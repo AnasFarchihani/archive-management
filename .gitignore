@@ -31,3 +31,4 @@ create_1.blade.php
 edit_1.blade.php
 index_1.blade.php
 show_1.blade.php
+trashed_1.blade.php

@@ -47,7 +47,7 @@ const setDrawer = open => { body.classList.toggle('sb-open', open); toggle?.setA
 const syncTips = () => tips.forEach(t => (body.classList.contains('sb-collapsed') && !mq.matches) ? t.enable() : t.disable());
 if (toggle) {
   try { if (!mq.matches && localStorage.getItem(KEY) === '1') body.classList.add('sb-collapsed'); } catch {}
-  $$('.sb-link').forEach(a => tips.push(new bootstrap.Tooltip(a, {title:a.dataset.label, placement:'right', trigger:'hover focus'})));
+  $$('.sb-link').forEach(a => {const label = a.dataset.label  || a.textContent.trim();if (!label)return;tips.push(new bootstrap.Tooltip(a, {title: label, placement:'right', trigger:'hover focus'}))});
   syncTips();
   toggle.setAttribute('aria-expanded', mq.matches ? 'false' : String(!body.classList.contains('sb-collapsed')));
   toggle.addEventListener('click', () => {

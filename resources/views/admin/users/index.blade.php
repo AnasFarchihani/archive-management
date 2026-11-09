@@ -44,12 +44,8 @@
                 <div class="col-6 col-lg">
                     <select
                         class="form-select"
-                        data-filter="role"
-                        aria-label="Filtrer : Tous les rôles">
-                        <option value="">Tous les rôles</option>
-                        <option>Administrateur</option>
-                        <option>Archiviste</option>
-                        <option>Lecteur</option>
+                        name="role">
+                        <option value="">- Tous les Rôles -</option>
                     </select>
                 </div>
                 <div class="col-6 col-lg">
@@ -57,13 +53,7 @@
                         class="form-select"
                         data-filter="department"
                         aria-label="Filtrer : Tous les départements">
-                        <option value="">Tous les départements</option>
-                        <option>Ressources humaines</option>
-                        <option>Finance</option>
-                        <option>Juridique</option>
-                        <option>Technique</option>
-                        <option>Communication</option>
-                        <option>Logistique</option>
+                        <option value="">- Tous les départements -</option>
                     </select>
                 </div>
                 <div class="col-6 col-lg">
@@ -71,9 +61,7 @@
                         class="form-select"
                         data-filter="status"
                         aria-label="Filtrer : Tous les statuts">
-                        <option value="">Tous les statuts</option>
-                        <option>Actif</option>
-                        <option>Inactif</option>
+                        <option value="">- Statuts -</option>
                     </select>
                 </div>
                 <div class="col-12 col-lg-auto d-grid d-lg-flex gap-2 ms-lg-auto"></div>

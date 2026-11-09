@@ -124,7 +124,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>ARC-2026-0026</td>
+                                <td>ARC-2030-0026</td>
                                 <td>Facture fournisseur n° 125</td>
                                 <td>Facture</td>
                                 <td>
@@ -171,13 +171,13 @@
                         <div class="d-grid gap-2">
                             <a
                                 class="btn btn-outline-primary text-start"
-                                href="archive-create.html" >
+                                href="{{ route('archives.create') }}" >
                                 <i class="bi bi-plus-circle me-2"></i>
                                 Nouvelle archive
                             </a>
                             <a
                                 class="btn btn-outline-primary text-start"
-                                href="archives.html" >
+                                href="{{ route('archives.index') }}" >
                                 <i class="bi bi-search me-2"></i>
                                 Consulter le registre
                             </a>

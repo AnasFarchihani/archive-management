@@ -46,9 +46,7 @@
                         class="form-select"
                         data-filter="status"
                         aria-label="Filtrer : Tous les statuts">
-                        <option value="">Tous les statuts</option>
-                        <option>Actif</option>
-                        <option>Inactif</option>
+                        <option value="">- Statuts -</option>
                     </select>
                 </div>
                 <div class="col-12 col-lg-auto d-grid d-lg-flex gap-2 ms-lg-auto"></div>

@@ -3,7 +3,7 @@
 @section('title', "Tableau de bord")
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item active" aria-current="page">Accueil</li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('dashboard') }}">Accueil</a></li>
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
             </p>
         </div>
         <div class="page-actions">
-            <a class="btn btn-primary" href="archive-create.html">
+            <a class="btn btn-primary" href="{{ route('archives.create') }}">
                 <i class="bi bi-plus-lg me-1"></i>Nouvelle archive
             </a> 
         </div>
@@ -171,13 +171,13 @@
                         <div class="d-grid gap-2">
                             <a
                                 class="btn btn-outline-primary text-start"
-                                href="archive-create.html" >
+                                href="{{ route('archives.create') }}" >
                                 <i class="bi bi-plus-circle me-2"></i>
                                 Nouvelle archive
                             </a>
                             <a
                                 class="btn btn-outline-primary text-start"
-                                href="archives.html" >
+                                href="{{ route('archives.index') }}" >
                                 <i class="bi bi-search me-2"></i>
                                 Consulter le registre
                             </a>
