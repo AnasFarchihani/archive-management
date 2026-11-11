@@ -2,7 +2,7 @@
     class="sidebar"
     id="sidebar"
     aria-label="Navigation principale">
-    <a class="sb-brand" href="{{ route('dashboard') }}">
+    <a class="sb-brand" href="#">
         <img src="{{ asset('assets/img/logo.svg') }}" alt="" width="34" height="34">
         <span class="sb-text">Archives
             <small>Gestion documentaire</small>
@@ -13,9 +13,9 @@
             @if (auth()->user()->isAdmin())
             <div class="sb-group">Principal</div>
             <a
-                class="sb-link active"
+                class="sb-link"
                 aria-current="page"
-                href="{{ route('dashboard') }}"
+                href="{{ route('admin.dashboard') }}"
                 data-label="Tableau de bord">
                 <i class="bi bi-speedometer2" aria-hidden="true"></i>
                 <span class="sb-text">Tableau de bord</span>
@@ -66,20 +66,20 @@
                 <i class="bi bi-geo-alt" aria-hidden="true"></i>
                 <span class="sb-text">Emplacements</span>
             </a>
-            <a
+            {{-- <a
                 class="sb-link"
-                href="#"
+                href="{{ route('admin.audit-logs.index') }}"
                 data-label="Journal d'audit">
                 <i class="bi bi-journal-text" aria-hidden="true"></i>
                 <span class="sb-text">Journal d'audit</span>
-            </a>
+            </a> --}}
 
             @else
                 <div class="sb-group">Principal</div>
                     <a
-                        class="sb-link active"
+                        class="sb-link"
                         aria-current="page"
-                        href="#"
+                        href="{{ route('dashboard') }}"
                         data-label="Tableau de bord">
                         <i class="bi bi-speedometer2" aria-hidden="true"></i>
                         <span class="sb-text">Tableau de bord</span>

@@ -3,9 +3,8 @@
 @section('title', $user->name)
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Administration</li>
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.index') }}"></a></li>
+    <li class="breadcrumb-item">Accueil</li>
+    <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
 @endsection
 
 @section('content')

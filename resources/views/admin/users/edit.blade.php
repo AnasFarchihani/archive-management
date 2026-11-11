@@ -3,9 +3,9 @@
 @section('title', 'Modifier un utilisateur')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Administration</li>
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.index') }}">Utilisateurs</a></li>
+    <li class="breadcrumb-item">Accueil</li>
+    <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
+    <li class="breadcrumb-item active" aria-current="page">Modifier</li>
 @endsection
 
 @section('content')

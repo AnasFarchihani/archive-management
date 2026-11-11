@@ -3,8 +3,9 @@
 @section('title', $archive->document_number)
 
 @section('breadcrumbs')
-<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('archives.index') }}">Archives</a></li>
+<li class="breadcrumb-item">Accueil</li>
+<li class="breadcrumb-item active" aria-current="page">Archives</li>
+<li class="breadcrumb-item active" aria-current="page">Fiche détaillée de l'archive</li>
 @endsection
 
 @section('content')
@@ -157,34 +158,6 @@
                         {{--  --}}
                     </div>
 
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="h6 mb-3">Historique d'activité</h2>
-                        <ul class="activity list-unstyled mb-0">
-                            <li>
-                                <span class="act-dot"></span>
-                                <div>
-                                    <div>Consultation par Karim Tazi</div>
-                                    <small class="text-muted">Aujourd'hui, 09:14</small>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="act-dot"></span>
-                                <div>
-                                    <div>Modification de l'emplacement par Sara Benali</div>
-                                    <small class="text-muted">12/09/2026, 16:40</small>
-                                </div>
-                            </li>
-                            <li>
-                                <span class="act-dot"></span>
-                                <div>
-                                    <div>Création de la fiche par Sara Benali</div>
-                                    <small class="text-muted">03/09/2026, 10:02</small>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
 

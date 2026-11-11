@@ -3,9 +3,8 @@
 @section('title', $department->name)
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Administration</li>
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.departments.index') }}">Départements</a></li>
+    <li class="breadcrumb-item">Accueil</li>
+    <li class="breadcrumb-item active" aria-current="page">Départements</li>
 @endsection
 
 @section('content')

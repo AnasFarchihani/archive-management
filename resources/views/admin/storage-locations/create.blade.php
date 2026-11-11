@@ -3,9 +3,8 @@
 @section('title', 'Nouvel emplacement')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Administration</li>
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.storage-locations.index') }}">Emplacements</a></li>
+    <li class="breadcrumb-item">Accueil</li>
+    <li class="breadcrumb-item active" aria-current="page">Emplacements</li>
 @endsection
 
 @section('content')

@@ -3,8 +3,7 @@
 @section('title', "Utilisateurs")
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Administration</li>
+    <li class="breadcrumb-item">Accueil</li>
     <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
 @endsection
 
@@ -26,47 +25,60 @@
         </div>
     </div>
 
-    <div class="card" data-table-wrap>
+    <div class="card">
+        <form method="GET" action="{{ route('admin.users.index') }}">
         <div class="card-body border-bottom">
             <div class="row g-2 align-items-center">
-                <div class="col-12 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-text bg-white">
-                            <i class="bi bi-search"></i>
-                        </span>
-                        <input
-                            type="search"
+                    <div class="col-12 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input
+                            type="text"
+                            name="search"
                             class="form-control"
                             data-search placeholder="Nom ou e-mail…"
-                            aria-label="Rechercher">
+                            value="{{ request('search') }}">
+                        </div>
                     </div>
-                </div>
+                
                 <div class="col-6 col-lg">
-                    <select
-                        class="form-select"
-                        name="role">
-                        <option value="">- Tous les Rôles -</option>
+                    <select class="form-select" name="role">
+                        <option value="">- Rôles -</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->value }}"
+                                {{ request('role') === $role->value ? 'selected' : '' }}>
+                                {{ $role->label() }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-6 col-lg">
-                    <select
-                        class="form-select"
-                        data-filter="department"
-                        aria-label="Filtrer : Tous les départements">
-                        <option value="">- Tous les départements -</option>
+                    <select class="form-select" name="department_id">
+                        <option value="">- Département -</option>
+                        @foreach ($departments as $dept)
+                            <option value="{{ $dept->id }}"
+                                {{ request('department_id') == $dept->id ? 'selected' : '' }}>
+                                {{ $dept->name }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-6 col-lg">
-                    <select
-                        class="form-select"
-                        data-filter="status"
-                        aria-label="Filtrer : Tous les statuts">
+                    <select class="form-select" name="is_active">
                         <option value="">- Statuts -</option>
+                        <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>Actif</option>
+                        <option value="0" {{ request('is_active') === '0' ? 'selected' : '' }}>Inactif</option>
                     </select>
                 </div>
                 <div class="col-12 col-lg-auto d-grid d-lg-flex gap-2 ms-lg-auto"></div>
+                <div class="col-md-1">
+                        <button class="btn btn-outline-primary w-100">Filtrer</button>
+                </div>
             </div>
         </div>
+    </form>
         <div class="table-responsive">
             <table
                 class="table table-hover align-middle mb-0"
@@ -134,6 +146,7 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="mt-3">{{ $users->links() }}</div>
         </div>
     <div class="empty d-none" data-empty><i class="bi bi-inbox"></i><p class="fw-semibold mb-1">Aucun résultat</p><p class="text-muted mb-0">Modifiez ou effacez vos filtres pour afficher des éléments.</p></div>
     <div class="card-footer bg-white d-flex flex-wrap gap-2 justify-content-between align-items-center"><small class="text-muted" data-count></small><nav aria-label="Pagination"><ul class="pagination pagination-sm mb-0" data-pager></ul></nav></div></div>

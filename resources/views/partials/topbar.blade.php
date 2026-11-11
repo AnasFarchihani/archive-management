@@ -16,19 +16,19 @@
         class="ms-auto d-none d-md-block topbar-search"
         data-global-search data-action="#" role="search">
         <div class="input-group">
-            <span class="input-group-text bg-light border-end-0">
+            {{-- <span class="input-group-text bg-light border-end-0">
                 <i class="bi bi-search" aria-hidden="true"></i>
-            </span>
-            <input
+            </span> --}}
+            {{-- <input
                 type="search"
                 class="form-control bg-light border-start-0"
                 placeholder="Rechercher une archive…"
-                aria-label="Rechercher une archive">
+                aria-label="Rechercher une archive"> --}}
         </div>
     </form>
     <div
         class="d-flex align-items-center gap-1 gap-sm-2 ms-auto ms-md-0">
-        <div class="dropdown">
+        {{-- <div class="dropdown">
             <button
                 class="btn btn-light position-relative"
                 data-bs-toggle="dropdown" aria-expanded="false"
@@ -55,13 +55,24 @@
                     Journal d'audit mis à jour
                 </a>
             </div>
+        </div> --}}
+        <div class="dropdown">
+            <button
+                class="badge text-bg-light border d-none d-sm-inline"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-label="Notifications (3)">
+                <i class="bi bi-translate" aria-hidden="true"></i>
+                FR
+            </button>
+            <div
+                class="dropdown-menu
+                dropdown-menu-end p-0 notif-menu">
+                <a class="dropdown-item py-2" href="#">
+                    <i class="bi bi-translate" aria-hidden="true"></i>
+                    العربية
+                </a>
+            </div>
         </div>
-        <span
-            class="badge text-bg-light border d-none d-sm-inline"
-            title="Langue de l'interface">
-            <i class="bi bi-translate" aria-hidden="true"></i>
-            FR
-        </span>
         <div class="dropdown">
             <button
                 class="btn btn-light d-flex align-items-center gap-2 px-2"

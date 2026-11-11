@@ -3,8 +3,9 @@
 @section('title', "Registre des archives")
 
 @section('breadcrumbs')
-<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('archives.index') }}">Archives</a></li>
+<li class="breadcrumb-item">Accueil</li>
+<li class="breadcrumb-item active" aria-current="page">Archives</li>
+<li class="breadcrumb-item active" aria-current="page">Registre des archives</li>
 @endsection
 
 @section('content')
@@ -88,13 +89,6 @@
                     </select>
                 </div>
             @endif
-            <div class="col-6 col-lg">
-                <input
-                type="date"
-                name="submission_date"
-                class="form-control"
-                value="{{ request('submission_date') }}">
-            </div>
                 <div class="col-12 col-lg-auto d-grid d-lg-flex gap-2 ms-lg-auto">
                     <button class="btn btn-outline-primary w-100">
                         Filtrer

@@ -3,9 +3,8 @@
 @section('title', 'Départements')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Administration</li>
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.departments.index') }}">Départements</a></li>
+    <li class="breadcrumb-item">Accueil</li>
+    <li class="breadcrumb-item active" aria-current="page">Départements</li>
 @endsection
 
 @section('content')
@@ -26,8 +25,9 @@
         </div>
     </div>
 
-    <div class="card" data-table-wrap>
+    <div class="card">
         <div class="card-body border-bottom">
+            <form method="GET" action="{{ route('admin.departments.index') }}">
             <div class="row g-2 align-items-center">
                 <div class="col-12 col-lg-4">
                     <div class="input-group">
@@ -35,23 +35,27 @@
                             <i class="bi bi-search"></i>
                         </span>
                         <input
-                            type="search"
+                            type="text"
+                            name="search"
                             class="form-control"
                             data-search placeholder="Rechercher…"
-                            aria-label="Rechercher">
+                            value="{{ request('search') }}">
                     </div>
                 </div>
                 <div class="col-6 col-lg">
-                    <select
-                        class="form-select"
-                        data-filter="status"
-                        aria-label="Filtrer : Tous les statuts">
+                    <select class="form-select" name="is_active">
                         <option value="">- Statuts -</option>
+                        <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>Actif</option>
+                        <option value="0" {{ request('is_active') === '0' ? 'selected' : '' }}>Inactif</option>
                     </select>
                 </div>
                 <div class="col-12 col-lg-auto d-grid d-lg-flex gap-2 ms-lg-auto"></div>
+                <div class="col-md-2">
+                    <button class="btn btn-outline-primary w-100">Filtrer</button>
+                </div>
             </div>
         </div>
+        </form>
         <div class="table-responsive">
             <table
                 class="table table-hover align-middle mb-0"
@@ -103,6 +107,7 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="mt-3">{{ $departments->links() }}</div>
         </div>
         <div class="empty d-none" data-empty>
             <i class="bi bi-inbox"></i>

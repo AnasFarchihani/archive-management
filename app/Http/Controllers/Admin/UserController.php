@@ -9,19 +9,52 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
 
-    public function index(): View
+    public function index(Request $request): View
     {
-        $users = User::with('department')
-            ->orderBy('name')
-            ->paginate(15);
+        $query = User::with('department');
 
-        return view('admin.users.index', compact('users'));
+        // Search by name or email
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        // Filtering by role
+
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
+        // Filtering by status (active/inactive)
+
+        if ($request->filled('is_active')) {
+            $query->where('is_active', $request->is_active === '1');
+        }
+
+        // Filtering by departments
+
+        if ($request->filled('department_id')) {
+            $query->where('department_id', $request->department_id);
+        }
+
+        $users = $query->orderBy('name')->paginate(15)->withQueryString();
+
+        return view('admin.users.index', [
+            'users' => $users,
+            'departments' => Department::orderBy('name')->get(),
+            'roles' => UserRole::cases(),
+        ]);
     }
 
     public function create(): View

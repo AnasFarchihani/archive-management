@@ -6,6 +6,7 @@ use App\Http\Requests\StoreArchiveFileRequest;
 use App\Models\Archive;
 use App\Models\ArchiveFile;
 use App\Services\ArchiveFileService;
+use App\Services\AuditLogService;
 use Illuminate\Http\RedirectResponse;
 
 class ArchiveFileController extends Controller
@@ -33,9 +34,10 @@ class ArchiveFileController extends Controller
     /**
      * Download file.
      */
-    public function download(ArchiveFile $file)
+    public function download(ArchiveFile $file, AuditLogService $audit)
     {
         $this->authorize('download', $file->archive);
+        $audit->logDownloaded($file);
 
         return $this->fileService->downloadFile($file);
     }

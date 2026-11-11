@@ -3,8 +3,9 @@
 @section('title', 'Modifier archive')
 
 @section('breadcrumbs')
-<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
-<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('archives.index') }}">Archives</a></li>
+<li class="breadcrumb-item">Accueil</li>
+<li class="breadcrumb-item active" aria-current="page">Archives</li>
+<li class="breadcrumb-item active" aria-current="page">Modifier</li>
 @endsection
 
 @section('content')

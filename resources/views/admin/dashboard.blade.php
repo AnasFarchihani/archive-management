@@ -15,7 +15,7 @@
             </p>
         </div>
         <div class="page-actions">
-            <a class="btn btn-primary" href="archive-create.html">
+            <a class="btn btn-primary" href="{{ route('archives.create') }}">
                 <i class="bi bi-plus-lg me-1"></i>Nouvelle archive
             </a> 
         </div>
@@ -29,8 +29,8 @@
                         <i class="bi bi-archive"></i>
                     </span>
                     <div>
-                        <div class="stat-num" data-stat="archives">-</div>
-                        <div class="text-muted small">Archives au total</div>
+                        <div class="stat-num">{{ $stats['total_archives'] }}</div>
+                        <div class="text-muted small">Archives (Supprimé {{ $stats['trashed_archives'] }})</div>
                     </div>
                 </div>
             </div>
@@ -43,8 +43,22 @@
                         <i class="bi bi-people"></i>
                     </span>
                     <div>
-                        <div class="stat-num" data-stat="users">–</div>
-                        <div class="text-muted small">Utilisateurs actifs</div>
+                        <div class="stat-num">{{ $stats['total_users'] }}</div>
+                        <div class="text-muted small">Utilisateurs (actifs {{ $stats['active_users'] }})</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-xl-3">
+            <div class="card stat">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <span class="stat-icon">
+                        <i class="bi bi-diagram-3"></i>
+                    </span>
+                    <div>
+                        <div class="stat-num">{{ $stats['total_departments'] }}</div>
+                        <div class="text-muted small">Départements (actifs {{ $stats['active_departments'] }})</div>
                     </div>
                 </div>
             </div>
@@ -57,22 +71,8 @@
                         <i class="bi bi-geo-alt"></i>
                     </span>
                     <div>
-                        <div class="stat-num" data-stat="locations">–</div>
-                        <div class="text-muted small">Emplacements</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-xl-3">
-            <div class="card stat">
-                <div class="card-body d-flex align-items-center gap-3">
-                    <span class="stat-icon">
-                        <i class="bi bi-hourglass-split"></i>
-                    </span>
-                    <div>
-                        <div class="stat-num" data-stat="pending">–</div>
-                        <div class="text-muted small">Éléments en attente</div>
+                        <div class="stat-num">{{ $stats['total_locations'] }}</div>
+                        <div class="text-muted small">Emplacements (actifs {{ $stats['active_locations'] }})</div>
                     </div>
                 </div>
             </div>
@@ -83,8 +83,19 @@
         <div class="col-lg-8">
             <div class="card h-100">
                 <div class="card-body">
-                    <h2 class="h6">Archives ajoutées par mois</h2>
-                    <div data-chart="Archives ajoutées par mois"></div>
+                    <h2 class="h6">Archives par département</h2>
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            @forelse ($archivesByDepartment as $dept)
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>{{ $dept->name }}</span>
+                                    <span class="badge bg-primary">{{ $dept->archives_count }}</span>
+                                </li>
+                            @empty
+                                
+                            @endforelse
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,8 +103,19 @@
         <div class="col-lg-4">
             <div class="card h-100">
                 <div class="card-body">
-                    <h2 class="h6">Répartition par statut</h2>
-                    <div data-chart="status" class="d-flex flex-column align-items-center gap-3"></div>
+                    <h2 class="h6">Archives par statut</h2>
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            @forelse ($archivesByStatus as $row)
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span> {{ $row->archive_status->label() }} </span>
+                                    <span class="badge bg-secondary">{{ $row->count }}</span>
+                                </li>
+                            @empty
+                                <li class="list-group-item text-muted">Aucune archive.</li>
+                            @endforelse
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,64 +126,46 @@
             <h2 class="h6">Documents récemment ajoutés</h2>
             <div class="card" data-table-wrap>
                 <div class="table-responsive">
-                    <table
-                        class="table table-hover align-middle mb-0"
-                        data-source=""
-                        data-per="5"
-                        data-actions="view"
-                        data-edit-href=""
-                        data-sort="date-desc"
-                        data-deleted="false" >
+                    <table class="table table-hover align-middle mb-0">
                         <thead>
                             <tr>
-                                <th scope="col" data-col="number">N°</th>
+                                <th scope="col" data-col="number">N° Document</th>
                                 <th scope="col" data-col="title">Titre</th>
-                                <th scope="col" data-col="type">Type</th>
-                                <th scope="col" data-col="status">Statut</th>
-                                <th scope="col" data-col="date">Date</th>
-                                <th scope="col" data-col="actions" class="text-end"> Actions</th>
+                                <th scope="col" data-col="type">Statut</th>
+                                <th scope="col" data-col="status">Date</th>
+                                <th scope="col" data-col="status">Département</th>
+                                <th scope="col" data-col="status">Créé par </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>ARC-2030-0026</td>
-                                <td>Facture fournisseur n° 125</td>
-                                <td>Facture</td>
-                                <td>
-                                    <span class="badge rounded-pill bg-danger-subtle text-danger-emphasis">Expiré</span>
-                                </td>
-                                <td>16/08/2026</td>
-                                <td>16/08/2026</td>
-                                <td class="text-end" >
-                                    <div class="d-inline-flex gap-1">
-                                        <a
-                                        href="#"
-                                        class="btn btn-sm btn-outline-secondary">
-                                        <i class="bi bi-eye"></i>
+                            @forelse ($recentArchives as $archive)
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('archives.show', $archive) }}">
+                                            {{ $archive->document_number }}
                                         </a>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>{{ Str::limit($archive->title, 50) }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ $archive->archive_status->badgeColor() }}">
+                                            {{ $archive->archive_status->label() }}
+                                        </span>
+                                    </td>
+                                    <td>{{ $archive->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $archive->department->code }}</td>
+                                    <td>{{ $archive->creator->name }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center py-3 text-muted">Aucune archive.</td>
+                                </tr>
+                            @endforelse
+                            
                         </tbody>
                     </table>
                 </div>
-
-                {{-- ******** --}}
-                <div class="empty d-none" data-empty>
-                    <i class="bi bi-inbox"></i>
-                    <p class="fw-semibold mb-1">Aucun résultat</p>
-                    <p class="text-muted mb-0">
-                        Modifiez ou effacez vos filtres pour afficher des éléments.
-                    </p>
-                </div>
-                <div class="card-footer bg-white d-flex flex-wrap gap-2 justify-content-between align-items-center">
-                    <small class="text-muted" data-count></small>
-                    <nav aria-label="Pagination">
-                        <ul class="pagination pagination-sm mb-0" data-pager></ul>
-                    </nav>
-                </div>
             </div>
-            {{-- ******** --}}
+            
             </div>
 
             <div class="col-lg-4">
@@ -173,7 +177,7 @@
                                 class="btn btn-outline-primary text-start"
                                 href="{{ route('archives.create') }}" >
                                 <i class="bi bi-plus-circle me-2"></i>
-                                Nouvelle archive
+                                Nouvelle archive 
                             </a>
                             <a
                                 class="btn btn-outline-primary text-start"
@@ -189,7 +193,7 @@
                             </a>
                             <a
                                 class="btn btn-outline-primary text-start"
-                                href="trash.html" >
+                                href="{{ route('archives.trashed') }}" >
                                 <i class="bi bi-trash3 me-2"></i>
                                 Ouvrir la corbeille
                             </a>
@@ -201,34 +205,20 @@
                     <div class="card-body">
                         <h2 class="h6">Activité récente</h2>
                             <ul class="activity list-unstyled mb-0">
-                                <li>
-                                    <span class="act-dot"></span>
-                                    <div>
-                                        <div>Sara Benali a créé ARC-2026-0026</div>
-                                        <small class="text-muted">Il y a 12 min</small>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="act-dot"></span>
-                                    <div>
-                                        <div>Karim Tazi a modifié ARC-2026-0019</div>
-                                        <small class="text-muted">Il y a 1 h</small>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="act-dot"></span>
-                                    <div>
-                                        <div>Imane Ouazzani a restauré ARC-2026-0009</div>
-                                        <small class="text-muted">Il y a 3 h</small>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="act-dot"></span>
-                                    <div>
-                                        <div>Omar Alaoui a exporté le registre</div>
-                                        <small class="text-muted">Hier</small>
-                                    </div>
-                                </li>
+                                @forelse ($recentActivities as $log)
+                                    <li>
+                                        <span class="act-dot"></span>
+                                        <div>
+                                            <div>{{ $log->user?->name ?? '-' }} - {{ $log->action}}</div>
+                                            {{-- <div><span class="badge bg-secondary">{{ $log->action}}</span></div> --}}
+                                            <small class="text-muted">{{ $log->created_at->format('d/m/Y H:i') }}</small>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center py-3 text-muted">Aucune activité.</td>
+                                    </tr>
+                                @endforelse
                             </ul>
                         </div>
                     </div>
